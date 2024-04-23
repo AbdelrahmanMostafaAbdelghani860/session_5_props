@@ -24,8 +24,14 @@ const RestaurantView = () => {
   };
 
   // create the >>filter<< of your dishes state here
-  const handleDishesFilter = (query) => {
-    console.log(query);
+  const handleDishesFilter = (...query) => {
+    setDishes(
+      dishes.filter((ele) => {
+        if (ele.name.includes(query)) {
+          return ele;
+        }
+      })
+    );
   };
 
   return (

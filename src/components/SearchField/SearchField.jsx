@@ -21,7 +21,17 @@ const SearchField = ({ filterDishes }) => {
   return (
     <div>
       <input
-        className={searchClasses.join(" ")}
+        onMouseEnter={() => {
+          setSearchClasses([...searchClasses, styles.mouseEnterBorder]);
+        }}
+        onMouseLeave={() => {
+          setSearchClasses([]);
+        }}
+        onFocus={() => {
+          setSearchClasses([...searchClasses, styles.focusedBorder]);
+        }}
+        onChange={handleOnChange}
+        className={searchClasses.join("  ")}
         placeholder="Filter dishes..."
         type="text"
       />
