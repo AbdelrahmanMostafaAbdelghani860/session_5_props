@@ -1,0 +1,100 @@
+/* Variables */
+:root {
+  --bg: #fef5df;
+}
+
+body {
+  background-color: var(--bg);
+}
+.centered {
+  text-align: center;
+  color: rgba(77, 77, 77, 0.9);
+  margin: 15px;
+  font: italic small-caps bold 16px/2 cursive;
+  font-size: 50px;
+  padding: 3px;
+}
+/* Container */
+.container_wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 2fr));
+  grid-gap: 15px;
+  padding: 15px;
+
+  margin: 10px;
+  /* place-items: center; */
+}
+
+.container {
+  height: 200px;
+  position: relative;
+  background-size: contain;
+  cursor: pointer;
+  -webkit-box-shadow: 0 0 2px #000;
+  box-shadow: 0 0 2px #000;
+}
+/* Overlay */
+.overlay {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 2fr 2fr 1fr;
+  background: rgba(77, 77, 77, 0.9);
+  color: var(--bg);
+  opacity: 0;
+  transition: all 0.5s;
+  font-family: "Playfair Display", serif;
+}
+
+/* Items */
+.items {
+  padding-left: 20px;
+  letter-spacing: 3px;
+}
+
+/* Head */
+.head {
+  font-size: 30px;
+  line-height: 40px;
+  margin: 5px;
+  transform: translateY(60px);
+  transition: all 0.7s;
+}
+
+.head hr {
+  display: block;
+  width: 0;
+  border: none;
+  border-bottom: solid 2px var(--bg);
+  position: absolute;
+  bottom: 0;
+  left: 20px;
+  transition: all 0.5s;
+}
+
+/* Hover Effect */
+.container:hover .overlay {
+  opacity: 1;
+}
+
+.container:hover .overlay .head {
+  transform: translateY(0px);
+}
+
+.container:hover .overlay hr {
+  width: 75px;
+  transition-delay: 0.4s;
+}
+
+.container:hover .overlay .price {
+  transform: translateY(0px);
+  transition-delay: 0.3s;
+  opacity: 1;
+}
+
+.container:hover .overlay .cart {
+  transform: translateY(0px);
+  transition-delay: 0.6s;
+  opacity: 1;
+}

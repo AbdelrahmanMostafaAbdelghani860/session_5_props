@@ -7,9 +7,80 @@
  * OPTONALLY: under the Flag, render the follwing information: Symbol of the currency (or currencies) of that country, and the capital (or capitals)
  * */
 
+import { useEffect, useState } from "react";
+import styles from "./Lesson13Exercise.module.css";
 const Lesson13Exercise = () => {
   const URL = "https://restcountries.com/v3.1/all";
-  return <div>Lesson13Exercise</div>;
+  const [fetchedData, setFetchedData] = useState([]);
+  // using Function to recieve the data from the API
+  const recievedData = async () => {
+    try {
+      const response = await fetch(URL);
+      const data = await response.json();
+      // console.log(data);
+      setFetchedData(data);
+    } catch (error) {
+      console.log(`Something went wrong ${error}`);
+    }
+  };
+  useEffect(() => {
+    recievedData();
+  }, []);
+
+  // console.log(recievedData);
+  return (
+    <>
+      <h1 className={styles.centered}>Countries of the World</h1>
+      <div className={styles.container_wrapper}>
+        {fetchedData.map((country) => (
+          <div
+            className={styles.container}
+            style={{
+              backgroundImage: `url(${country.coatOfArms.png})`,
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+            }}
+            key={country.name.official}>
+            <div className={styles.overlay}>
+              <div className={styles.items}>
+                <div className={styles.head}>
+                  <p>{country.name.common}</p>
+                </div>
+                <hr />
+                {/* Capital City  */}
+                <p style={{ margin: "10px" }}>
+                  The Capital City Is
+                  <br />
+                  {country.capital &&
+                    country.capital.length === 0 &&
+                    "No Country Capital is Shown "}
+                  {country.capital &&
+                    country.capital.length === 1 &&
+                    country.capital[0]}
+                  {country.capital && country.capital.length > 1 && (
+                    <ul>
+                      {country.capital.map((capital) => (
+                        <li>{capital}</li>
+                      ))}
+                    </ul>
+                  )}
+                </p>
+                <div style={{ margin: "10px" }}>
+                  <p>
+                    {" "}
+                    The Number of Population is <br />
+                    {country.population}
+                  </p>
+                </div>
+              </div>
+
+              <p className={styles.price}>{/* Content */}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </>
+  );
 };
 
 export default Lesson13Exercise;
